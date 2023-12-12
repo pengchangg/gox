@@ -23,10 +23,13 @@ jobs:
     - run: go version
 
     - name: Build
-      run: go build -v ./...
+      run: go build -o main -v ./...
 
     - name: Test
       run: go test -v ./...
 
+    - name: Run
+      run: ./main
+
     - name: List Distributions
-      run: ls -all
+      run: ls -allh

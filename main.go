@@ -6,5 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println(time.Now().Local().Format(time.DateTime))
+	location, _ := time.LoadLocation("Asia/Shanghai")
+	var t  = time.Now().In(location).Format(time.DateTime)
+	fmt.Println(t)
 }

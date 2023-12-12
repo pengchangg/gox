@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(time.Now().UTC().Local().Unix())
+	fmt.Println(time.Now().Local().Format(time.DateTime))
 }

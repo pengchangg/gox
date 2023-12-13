@@ -41,7 +41,7 @@ jobs:
       run: ./main
 
     - name: Install redis-cli
-      run: sudo apt-get install redis -y
+      run: sudo apt-get install redis -y && sudo service redis stop
 
     - name: Connect to Redis
       run: redis-cli -h 127.0.0.1

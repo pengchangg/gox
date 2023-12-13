@@ -39,7 +39,7 @@ jobs:
       run: ./main
 
     - name: Connect to Redis
-      run: docker ps -a && go run redis/main.go
+      run: docker ps -a && netstat -tunlp && go run redis/main.go
       env:
         # The hostname used to communicate with the Redis service container
         REDIS_HOST: localhost

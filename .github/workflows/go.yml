@@ -15,5 +15,5 @@ jobs:
       uses: actions/setup-go@v4
     - run: go version
 
-    - name: Run Shell
-      run: bash build.sh
+    - name: Make
+      run: make all

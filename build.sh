@@ -1,4 +1,4 @@
 go test ./...
-go build -o ./bin/gox .
 
-./bin/gox
+# 交叉编译成各个主流平台的可执行文件
+

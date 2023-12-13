@@ -54,5 +54,6 @@ func main() {
 
 	cmd := client.Ping(context.Background())
 
-	fmt.Printf("Ping: %s\n", cmd.Val())
+	cmd.Err()
+	fmt.Printf("Ping: %s,error:%s\n", cmd.Val(),cmd.Err().Error())
 }

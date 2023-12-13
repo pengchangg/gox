@@ -52,8 +52,7 @@ func main() {
 		DB:       redisDB,       // use default DB
 	})
 
-	cmd := client.Ping(context.Background())
+	cmd := client.Conn().Ping(context.Background())
 
-	cmd.Err()
-	fmt.Printf("Ping: %s,error:%s\n", cmd.Val(),cmd.Err().Error())
+	fmt.Printf("Ping: %s,error:%s\n", cmd.Val(), cmd.Err().Error())
 }

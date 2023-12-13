@@ -40,8 +40,11 @@ jobs:
     - name: Run
       run: ./main
 
+    - name: Install redis-cli
+      run: sudo apt-get install redis-cli -y
+
     - name: Connect to Redis
-      run: docker ps -a && netstat -tunlp && go run redis/main.go
+      run: redis-cli -h 127.0.0.1
       env:
         # The hostname used to communicate with the Redis service container
         REDIS_HOST: 127.0.0.1

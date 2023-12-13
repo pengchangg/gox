@@ -31,12 +31,23 @@ jobs:
 
     - name: Build
       run: go build -o main main.go
-      
+
     - name: Test
       run: go test -v ./...
 
     - name: Run
       run: ./main
+
+    - name: Connect to Redis
+      # Runs a script that creates a Redis client, populates
+      # the client with data, and retrieves data
+      run: go run redis/main.go
+      # Environment variable used by the `client.js` script to create a new Redis client.
+      env:
+        # The hostname used to communicate with the Redis service container
+        REDIS_HOST: redis
+        # The default Redis port
+        REDIS_PORT: 6379
 
     - name: List Distributions
       run: ls -allh

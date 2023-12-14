@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"strconv"
 
 	"github.com/redis/go-redis/v9"
+	"log"
 )
 
 var (
@@ -45,7 +45,7 @@ func init() {
 
 func main() {
 	addr := redisHost + ":" + strconv.Itoa(redisPort)
-	fmt.Printf("ridis addr : %s\n", addr)
+	log.Printf("ridis addr : %s\n", addr)
 	client := redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: redisPassword, // no password set
@@ -54,5 +54,5 @@ func main() {
 
 	cmd := client.Conn().Ping(context.Background())
 
-	fmt.Printf("Ping: %s,error:%s\n", cmd.Val(), cmd.Err().Error())
+	log.Printf("Ping: %s,error:%s\n", cmd.Val(), cmd.Err().Error())
 }

@@ -28,5 +28,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+
+    - name: Connect to Redis
+      run: go run redis/main.go
+      env:
+        REDIS_HOST: redis
+        REDIS_PORT: 6379
+
     - name: Make
       run: make all

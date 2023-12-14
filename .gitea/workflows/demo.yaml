@@ -17,3 +17,20 @@ jobs:
         run: |
           ls ${{ gitea.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+  use-go-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21.4'
+
+      - name: Export GO_ENV
+        run:  export GO111MODULE=on && export GOPROXY=https://goproxy.cn
+
+      - name: Make
+        uses: make all

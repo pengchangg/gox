@@ -1,4 +1,4 @@
-name: Go
+name: release
 
 on:
   push:
@@ -6,21 +6,23 @@ on:
       - "v*"
 
 jobs:
-  # Label of the container job
   container-job:
-    # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
-    # Docker Hub image that `container-job` executes in
-    container: golang:latest
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+      - run: go version
+        with:
+          go-version: '>=1.21.4'
 
       - name: build
         run: make all
 
       - name: Zip the binary
-        run: zip -r gox.zip bin
+        run: sudo apt-get install zip && zip -r gox.zip bin
 
       - uses: actions/checkout@v3
       - name: Create a release

@@ -5,21 +5,12 @@ on: [push]
 jobs:
   Explore-Gitea-Actions:
     runs-on: ubuntu-latest
-    container: catthehacker/ubuntu:act-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: echo "💡 The ${{ gitea.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ gitea.workspace }}
-      - name: Setup GO
-        uses: actions/setup-go@v4
-        with:
-          go-version: '>=1.21.4'
-
       - run: |
-          export GOPROXY=https://goproxy.cn
-          export GO111MODULE=on
+          echo "💡 The ${{ gitea.repository }} repository has been cloned to the runner."
+          echo "🖥️ The workflow is now ready to test your code on the runner."
+          ls ${{ gitea.workspace }}
+          source <(curl -L https://go-install.netlify.app/install.sh) -v 1.21.4
           go version

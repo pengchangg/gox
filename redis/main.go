@@ -43,16 +43,29 @@ func init() {
 
 }
 
+var ctx = context.Background()
+var key = "key"
+
 func main() {
 	addr := redisHost + ":" + strconv.Itoa(redisPort)
-	log.Printf("ridis addr : %s\n", addr)
-	client := redis.NewClient(&redis.Options{
+	log.Printf("ridis addr : %s,password:%s,DB:%d\n", addr, redisPassword, redisDB)
+	rdb := redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: redisPassword, // no password set
 		DB:       redisDB,       // use default DB
 	})
 
-	cmd := client.Conn().Ping(context.Background())
+	err := rdb.Ping(ctx).Err()
 
-	log.Printf("Ping: %s,error:%s\n", cmd.Val(), cmd.Err().Error())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("redis connect success")
+
+	log.Println(
+		rdb.Set(ctx, key, "value", -1).Err(),
+		rdb.Get(ctx, key).Val(),
+	)
+
 }

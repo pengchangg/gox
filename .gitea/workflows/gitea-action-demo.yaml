@@ -22,7 +22,6 @@ jobs:
           export GOPATH="/root/go"
           export GOBIN="$GOPATH/bin"
           export PATH=$PATH:$GOBIN:/usr/local/go/bin
-          source .bashrc
           # 验证
           go env
           go version

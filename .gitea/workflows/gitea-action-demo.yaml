@@ -2,6 +2,14 @@ name: Gitea Actions Demo
 run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
 
+cache:
+  enabled: true
+  dir: ""
+  # 使用步骤 1. 获取的 LAN IP
+  host: "10.206.0.1"
+  # 使用步骤 2. 获取的端口号
+  port: 8088
+
 jobs:
   Explore-Gitea-Actions:
     runs-on: ubuntu-latest

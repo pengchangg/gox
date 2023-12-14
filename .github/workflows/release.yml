@@ -1,21 +1,31 @@
-# .github/workflows/release.yaml
+name: Go
 
 on:
-  release:
-    types: [created]
-
-permissions:
-    contents: write
-    packages: write
+  push:
+    tags:
+      - "v*"
 
 jobs:
-  release-linux-amd64:
-    name: release linux/amd64
+  # Label of the container job
+  container-job:
+    # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
+    # Docker Hub image that `container-job` executes in
+    container: golang:latest
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: wangyoucao577/go-release-action@v1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: linux
-        goarch: amd64
+      - uses: actions/checkout@v4
+
+      - name: build
+        run: make all
+
+      - name: Zip the binary
+        run: zip -r gox.zip bin
+
+      - uses: actions/checkout@v3
+      - name: Create a release
+        uses: action-pack/github-release@v2
+        with:
+          tag: MyReleaseTag
+          title: MyReleaseTitle
+          body: MyReleaseMessage

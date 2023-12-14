@@ -1,0 +1,29 @@
+name: Gitea Actions Demo
+run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
+on: [push]
+
+jobs:
+  Explore-Gitea-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: |
+          echo "💡 The ${{ gitea.repository }} repository has been cloned to the runner."
+          echo "🖥️ The workflow is now ready to test your code on the runner."
+          ls ${{ gitea.workspace }}
+          # 下载
+          wget https://golang.google.cn/dl/go1.21.4.linux-amd64.tar.gz
+          # 解压
+          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.4.linux-amd64.tar.gz
+          # 配置 .bashrc
+          export GO111MODULE=on
+          export GOPROXY=https://goproxy.cn
+          export GOPATH="/root/go"
+          export GOBIN="$GOPATH/bin"
+          export PATH=$PATH:$GOBIN:/usr/local/go/bin
+          source .bashrc
+          # 验证
+          go env
+          go version
+          make all

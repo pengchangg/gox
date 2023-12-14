@@ -32,5 +32,4 @@ jobs:
           export PATH=$PATH:$GOBIN:/usr/local/go/bin
           # 验证
           go env
-          go version
           make all

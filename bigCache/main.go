@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/allegro/bigcache/v3"
 	"time"
+
+	"github.com/allegro/bigcache/v3"
 )
 
 func main() {

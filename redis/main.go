@@ -5,8 +5,9 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/redis/go-redis/v9"
 	"log"
+
+	"github.com/redis/go-redis/v9"
 )
 
 var (

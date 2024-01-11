@@ -1,3 +1,5 @@
+all: test clean build
+
 BINARY_NAME=gox
 
 test:
@@ -19,4 +21,10 @@ clean:
 	go clean
 	rm -rf ./bin
 
-all: test clean build
+build-linux-amd64:
+	mkdir -p build
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o build/${BINARY_NAME}_linux_amd64 main.go
+
+build-linux-arm64:
+	mkdir -p build
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o build/${BINARY_NAME}_linux_arm64 main.go
